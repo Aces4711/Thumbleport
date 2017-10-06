@@ -3,6 +3,7 @@ package org.usfirst.frc.team4711.robot.subsystems
 import com.ctre.MotorControl.CANTalon
 import edu.wpi.first.wpilibj.RobotDrive
 import org.usfirst.frc.team4711.robot.Constants
+import org.usfirst.frc.team4711.robot.lib.DriveSignal
 
 object Drivetrain {
     val m_leftSRX = CANTalon(Constants.kL_MASTER_DRIVE)
@@ -21,11 +22,5 @@ object Drivetrain {
         m_rightSlaveSRX.set(m_rightSRX.getDeviceID().toDouble())**/
     }
 
-    fun drive(left: Double, right: Double) = m_drive.tankDrive(-left * 0.9, -right * 0.9)
-    fun brake(trigger: Boolean) {
-        m_leftSRX.enableBrakeMode(trigger)
-        m_rightSRX.enableBrakeMode(trigger)
-        m_leftSlaveSRX.enableBrakeMode(trigger)
-        m_rightSlaveSRX.enableBrakeMode(trigger)
-    }
+    fun drive(signal: DriveSignal) = m_drive.tankDrive(signal.left, signal.right)
 }

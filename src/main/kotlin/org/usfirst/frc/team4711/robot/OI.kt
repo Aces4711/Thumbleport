@@ -16,6 +16,9 @@ object OI {
     fun getLeftThrottle() = deadzone(driverController.getRawAxis(1))
     fun getRightThrottle() = deadzone(driverController.getRawAxis(5))
 
+    fun getThrottle() = deadzone(-driverController.getY())
+    fun getRate() = deadzone(-driverController.getX())
+
     fun getIntake() = driverController.getX()
     fun getShooter() = driverController.getY()
 
