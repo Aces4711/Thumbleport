@@ -8,8 +8,25 @@ object FunkyDrive {
         val leftOverflow = leftRoom < rate
         val rightOverflow = rightRoom < rate
 
-        val leftSpeed = throttle + if (!leftOverflow) { rate * getDir(rate) } else { 1.0 }
-        val rightSpeed = throttle + if (!rightOverflow) { rate * getDir(rate) } else { 1.0 }
+        //val leftSpeed = throttle + if (!leftOverflow) { rate * getDir(rate) } else { 1.0 }
+        //val rightSpeed = throttle + if (!rightOverflow) { rate * getDir(rate) } else { 1.0 }
+
+        var leftSpeed = 0.0
+        var rightSpeed = 0.0
+
+        if (!leftOverflow and (rate < 0)) {
+            leftSpeed = throttle + rate
+        } else {
+            leftSpeed = 1.0
+            rightSpeed = throttle + (leftRoom - rate)
+        }
+
+        if (!rightOverflow and (rate > 0)) {
+            rightSpeed = throttle + rate
+        } else {
+            rightSpeed = 1.0
+            leftSpeed = throttle + (rightRoom - rate)
+        }
 
         return DriveSignal(leftSpeed, rightSpeed, false)
     }

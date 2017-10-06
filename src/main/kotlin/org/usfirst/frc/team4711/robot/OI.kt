@@ -19,8 +19,9 @@ object OI {
     fun getThrottle() = deadzone(-driverController.getY())
     fun getRate() = deadzone(-driverController.getX())
 
-    fun getIntake() = driverController.getX()
-    fun getShooter() = driverController.getY()
+    fun getIntake() = driverController.getXButton()
+    fun getShooter() = driverController.getYButton()
 
     fun getBrake() = driverController.getAButton()
+    fun getQuickturn() = driverController.getBButton()
 }
